@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: practice-4
+  name: practice-3
 spec:
   containers:
   - name: count

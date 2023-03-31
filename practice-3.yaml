@@ -8,7 +8,3 @@ spec:
     image: busybox:1.28
     args: [/bin/sh, -c,
             'i=0; while true; do echo "$i: $(date) ERROR";echo "$i: $(date) Warning";echo "$i: $(date) INFO"; i=$((i+1)); sleep 1; done']
-
-
-
-Edited

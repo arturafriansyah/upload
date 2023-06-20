@@ -29,37 +29,27 @@ sudo systemctl daemon-reload
 echo ""
 
 echo "Delete All about Docker"
-# Memeriksa apakah Docker terinstal
-if [ -x "$(command -v docker)" ]; then
-    # Menghapus semua komponen Docker
-    containers=$(docker ps -aq)
-    if [ -n "$containers" ]; then
-        docker rm -f $containers > /dev/null 2>&1
-    fi
+##Unintall Package
+sudo apt -y remove docker docker-ce docker-engine docker.io containerd runc
+sudo apt -y autoclean docker-ce docker.io docker
+sudo apt -y purge docker-ce docker.io docker
+sudo apt -y autoremove
+sudo snap remove docker
 
-    images=$(docker images -aq)
-    if [ -n "$images" ]; then
-        docker rmi -f $images > /dev/null 2>&1
-    fi
+##Remove docker dir & files
+ls /var/lib/ | grep doc
+rm -rf /var/lib/docker
+ls /var/lib/ | grep doc
+ls /etc/ | grep docker
+rm -rf /etc/docker
+ls /var/run/ | grep docker
+rm -rf /var/run/docker
+rm -rf /var/run/docker.sock
+ls /snap | grep docker
+rm -rf /snap/docker/
 
-    networks=$(docker network ls -q)
-    if [ -n "$networks" ]; then
-        docker network rm $networks > /dev/null 2>&1
-    fi
-
-    volumes=$(docker volume ls -q)
-    if [ -n "$volumes" ]; then
-        docker volume rm $volumes > /dev/null 2>&1
-    fi
-
-    # Menghapus Docker
-    if [ -x "$(command -v docker-compose)" ]; then
-        docker-compose down --volumes --remove-orphans > /dev/null 2>&1
-    fi
-
-    # Menghapus komponen pendukung Docker
-    sudo apt-get -y remove docker-ce docker-ce-cli containerd.io > /dev/null 2>&1
-    sudo rm -rf /var/lib/docker /etc/docker /etc/systemd/system/docker.service.d /usr/bin/docker-compose > /dev/null 2>&1
-fi
+##unmount volume driver
+umount /var/lib/docker/aufs
+rm -rf /var/lib/docker
 echo ""
-echo "Done"
+echo "DONE!!"

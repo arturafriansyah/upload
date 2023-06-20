@@ -18,6 +18,12 @@ sudo systemctl disable alert_manager.service
 echo "Stop and Disable Alert Manager Success"
 echo ""
 
+echo "Stop and Disable Cadvisor"
+sudo systemctl stop cadvisor.service
+sudo systemctl disable cadvisor.service
+echo "Stop and Disable Cadvisor Success"
+echo ""
+
 echo "Stop and Disable Grafana"
 sudo systemctl stop grafana.service
 sudo systemctl disable grafana.service

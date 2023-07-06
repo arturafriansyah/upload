@@ -1,3 +1,4 @@
+cat << EOF > /tmp/clear-prome.sh
 #!/bin/bash
 echo ""
 echo "Stop and Disable Node Exporter"
@@ -43,9 +44,8 @@ sudo docker volume rm $(docker volume ls -q)
 sudo docker network rm $(docker network ls -q)
 
 ##Unintall Package
-sudo apt -y remove docker docker-ce docker-engine docker.io containerd runc
-sudo apt -y autoclean docker-ce docker.io docker
-sudo apt -y purge docker-ce docker.io docker
+sudo apt -y remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt -y purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo apt -y autoremove
 sudo snap remove docker
 
@@ -60,5 +60,6 @@ rm -rf /snap/docker/
 umount /var/lib/docker/aufs
 rm -rf /var/lib/docker
 
-echo ""
 echo "DONE!!"
+
+EOF

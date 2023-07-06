@@ -36,34 +36,12 @@ sudo systemctl daemon-reload
 echo ""
 
 echo "Delete All about Docker"
-# Memeriksa apakah Docker terinstal
-if [ -x "$(command -v docker)" ]; then
-    # Menghapus semua komponen Docker
-    containers=$(docker ps -aq)
-    if [ -n "$containers" ]; then
-        docker rm -f $containers > /dev/null 2>&1
-    fi
+##Delete All Container, Image, Network & Volume
+sudo docker rm -f $(docker ps -aq)
+sudo docker rmi $(docker image ls -q)
+sudo docker volume rm $(docker volume ls -q)
+sudo docker netwrok rm $(docker network ls -q)
 
-    images=$(docker images -aq)
-    if [ -n "$images" ]; then
-        docker rmi -f $images > /dev/null 2>&1
-    fi
-
-    networks=$(docker network ls -q)
-    if [ -n "$networks" ]; then
-        docker network rm $networks > /dev/null 2>&1
-    fi
-
-    volumes=$(c)
-    if [ -n "$volumes" ]; then
-        docker volume rm $volumes > /dev/null 2>&1
-    fi
-
-    # Menghapus Docker
-    if [ -x "$(command -v docker-compose)" ]; then
-        docker-compose down --volumes --remove-orphans > /dev/null 2>&1
-    fi
-fi
 ##Unintall Package
 sudo apt -y remove docker docker-ce docker-engine docker.io containerd runc
 sudo apt -y autoclean docker-ce docker.io docker

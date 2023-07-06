@@ -45,20 +45,22 @@ sudo docker network rm $(docker network ls -q)
 
 ##Unintall Package
 sudo apt -y remove docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-sudo apt -y purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
 sudo apt -y autoremove
 sudo snap remove docker
 
 ##Remove docker dir & files
-rm -rf /var/lib/docker
-rm -rf /etc/docker
-rm -rf /var/run/docker
-rm -rf /var/run/docker.sock
-rm -rf /snap/docker/
+sudo rm -rf /var/lib/docker
+sudo rm -rf /etc/docker
+sudo rm -rf /var/run/docker
+sudo rm -rf /var/run/docker.sock
+sudo rm -rf /snap/docker/
+sudo rm -rf /var/lib/docker
+sudo rm -rf /var/lib/containerd
 
 ##unmount volume driver
-umount /var/lib/docker/aufs
-rm -rf /var/lib/docker
+sudo umount /var/lib/docker/aufs
+sudo rm -rf /var/lib/docker
 
 echo "DONE!!"
 

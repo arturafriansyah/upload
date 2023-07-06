@@ -3,6 +3,7 @@ echo ""
 echo "Stop and Disable Node Exporter"
 sudo systemctl stop node_exporter.service
 sudo systemctl disable node_exporter.service
+ssh -o PasswordAuthentication=no $(cat /etc/hosts | grep pod-node2 | awk '{print $1}') 'sudo systemctl stop node_exporter.service; sudo systemctl disable node_exporter.service'
 echo "Stop and Disable Node Exporter Success"
 echo ""
 

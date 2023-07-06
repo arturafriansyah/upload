@@ -40,7 +40,7 @@ echo "Delete All about Docker"
 sudo docker rm -f $(docker ps -aq)
 sudo docker rmi $(docker image ls -q)
 sudo docker volume rm $(docker volume ls -q)
-sudo docker netwrok rm $(docker network ls -q)
+sudo docker network rm $(docker network ls -q)
 
 ##Unintall Package
 sudo apt -y remove docker docker-ce docker-engine docker.io containerd runc
